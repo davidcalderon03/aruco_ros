@@ -147,8 +147,8 @@ public:
   }
 
   bool getTransform(
-    const std::string &refFrame, const std::string &childFrame,
-    geometry_msgs::msg::TransformStamped &transform)
+    const std::string &refFrame, const std::string & childFrame,
+    geometry_msgs::msg::TransformStamped & transform)
   {
     std::string errMsg;
 
@@ -162,8 +162,7 @@ public:
       try {
         transform = tf_buffer_->lookupTransform(
           refFrame, childFrame, tf2::TimePointZero, tf2::durationFromSec(0.5));
-      } catch (const tf2::TransformException &e)
-      {
+      } catch (const tf2::TransformException & e) {
         RCLCPP_ERROR_STREAM(
           this->get_logger(),
           "Error in lookupTransform of " << childFrame << " in " << refFrame << " : " << e.what());

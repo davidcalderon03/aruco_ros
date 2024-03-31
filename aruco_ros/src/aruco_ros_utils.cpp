@@ -47,9 +47,9 @@ aruco::CameraParameters aruco_ros::rosCameraInfo2ArucoCamParams(
       }
     } else {
       RCLCPP_WARN(
-          rclcpp::get_logger(
-            "aruco_ros"),
-          "length of camera_info D vector is not 4, assuming zero distortion...");
+        rclcpp::get_logger(
+          "aruco_ros"),
+        "length of camera_info D vector is not 4, assuming zero distortion...");
       for (int i = 0; i < 4; ++i) {
         distorsionCoeff.at<double>(i, 0) = 0;
       }
@@ -80,12 +80,12 @@ tf2::Transform aruco_ros::arucoMarker2Tf2(const aruco::Marker & marker)
 }
 
 std::vector<aruco::Marker> aruco_ros::detectMarkers(
-    const cv::Mat &img,
-    const aruco::CameraParameters & cam_params,
-    float marker_size,
-    aruco::MarkerDetector * detector,
-    bool normalize_ilumination,
-    bool correct_fisheye)
+  const cv::Mat &img,
+  const aruco::CameraParameters & cam_params,
+  float marker_size,
+  aruco::MarkerDetector * detector,
+  bool normalize_ilumination,
+  bool correct_fisheye)
 {
   std::vector<aruco::Marker> markers;
   try {
@@ -106,7 +106,7 @@ std::vector<aruco::Marker> aruco_ros::detectMarkers(
       default_detector.detect(img, markers, cam_params, marker_size, false, correct_fisheye);
     }
     return markers;
-  } catch (cv_bridge::Exception &e) {
+  } catch (cv_bridge::Exception & e) {
     RCLCPP_ERROR(rclcpp::get_logger("aruco_ros"), "cv_bridge exception: %s", e.what());
 
     return markers;
@@ -114,7 +114,7 @@ std::vector<aruco::Marker> aruco_ros::detectMarkers(
 }
 
 visualization_msgs::msg::Marker aruco_ros::visMarkerFromPose(
-  const geometry_msgs::msg::PoseStamped &pose, double marker_size, int marker_id)
+  const geometry_msgs::msg::PoseStamped & pose, double marker_size, int marker_id)
 {
   visualization_msgs::msg::Marker visMarker;
   visMarker.header = pose.header;
